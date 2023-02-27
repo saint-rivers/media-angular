@@ -1,3 +1,5 @@
 <p>testing works!</p>
-<p>{{messages|json}}</p>
+<p *ngFor="let chat of chatMap | keyvalue">{{ chat | json }}</p>
+
+<input type="text" placeholder="targetChatId" (change)="updateChatId($event)">
 <button (click)="sendTestMessage()">Test</button>
