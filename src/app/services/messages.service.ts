@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as env from '../../environments/environment';
-import { Message, MessageRequest } from '../models/message';
+import { Message, MessageRequest } from '../models/message.model';
 import { WebSocketService } from './websocket.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MessagesService {
-  constructor(
-    private http: HttpClient,
-  ) {}
+  constructor(private http: HttpClient) {}
 
   getByConversationId(conversationId: number): Observable<Message[]> {
     return this.http.get<Message[]>(

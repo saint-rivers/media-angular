@@ -1,7 +1,6 @@
-import { ChatData } from './chat-message';
-import { Message } from 'src/app/models/message';
+import { Message } from 'src/app/models/message.model';
 
-export interface Chat {
+export interface Conversation {
   chatId: number;
   groupName: string;
   groupProfile: string;

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Chat } from '../../models/chat';
+import { Conversation } from '../../models/chat.model';
 import { ConversationService } from '../../services/conversation.service';
 
 @Component({
@@ -8,6 +8,4 @@ import { ConversationService } from '../../services/conversation.service';
   templateUrl: './messaging.component.html',
   styleUrls: ['./messaging.component.css'],
 })
-export class MessagingComponent {
-
-}
+export class MessagingComponent {}

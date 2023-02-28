@@ -1,27 +1,19 @@
-# MediaAngular
+# Media
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+## Technologies
 
-## Development server
+- Reactive Forms
+- SockJS (to working with spring boot websocket)
+- Stomp Client (to working with spring boot websocket)
+- NgRx (for angular's state management when storing chat information)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## References:
 
-## Code scaffolding
+NgRx Tutorial, but there's something wrong with it when adding the reducer to `app.module.ts`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<https://blog.logrocket.com/angular-state-management-made-simple-with-ngrx/>
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Something weird was happening with NgRx state management. This seems to fix the syntax error.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+<https://stackoverflow.com/questions/66165872/types-of-parameters-action-and-action-are-incompatible-property-payload-i>

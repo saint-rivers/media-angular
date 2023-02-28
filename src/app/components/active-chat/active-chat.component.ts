@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Message } from 'src/app/models/message';
+import { Message } from 'src/app/models/message.model';
 import { MessagesService } from '../../services/messages.service';
 import { FormBuilder } from '@angular/forms';
-import { MessageRequest } from '../../models/message';
+import { MessageRequest } from '../../models/message.model';
 import { WebSocketService } from '../../services/websocket.service';
+import * as Stomp from 'stompjs';
 
 @Component({
   selector: 'app-active-chat',
@@ -14,6 +15,7 @@ import { WebSocketService } from '../../services/websocket.service';
 export class ActiveChatComponent {
   activeChatId: number = -1;
   messages: Message[] = [];
+  // stompClient: Stomp.Client;
 
   newMessage = this.formBuilder.group({
     content: [''],
@@ -36,7 +38,11 @@ export class ActiveChatComponent {
     private webSocketService: WebSocketService,
     private formBuilder: FormBuilder
   ) {
-    webSocketService.openSocketConnection();
+    webSocketService.subscribeToTopic((data: Stomp.Message) => {
+      const payload: Message = JSON.parse(data.body);
+      this.messages.push(payload);
+    });
+
     this.messages = webSocketService.chatMap.get(
       this.activeChatId.toString()
     )?.messages!;

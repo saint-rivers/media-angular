@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as env from '../../environments/environment';
-import { Chat } from '../models/chat';
+import { Conversation } from '../models/chat.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ import { Chat } from '../models/chat';
 export class ConversationService {
   constructor(private http: HttpClient) {}
 
-  postConversation(conversation: any): Observable<Chat> {
-    return this.http.post<Chat>(
+  postConversation(conversation: any): Observable<Conversation> {
+    return this.http.post<Conversation>(
       `${env.environment.apiUrl}/api/v1/conversations`,
       {
         ...conversation,

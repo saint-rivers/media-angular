@@ -1,6 +1,13 @@
 <p>active-chat works!</p>
-<p>{{messages|json}}</p>
+<!-- <p>{{messages|json}}</p> -->
 
+<div *ngFor="let message of messages">
+  <!-- {{message | json}} -->
+  <div class="text-bubble">
+    <p>{{message.content}}</p>
+    <p>{{message.timeSent}}</p>
+  </div>
+</div>
 
 <form action="" [formGroup]="newMessage" (submit)="sendMessage()">
   <input type="text" placeholder="type your message here" formControlName="content">

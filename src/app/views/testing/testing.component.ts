@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WebSocketService } from '../../services/websocket.service';
 import { ChatRequest } from '../../models/chat-message';
-import { Chat } from 'src/app/models/chat';
+import { Conversation } from 'src/app/models/chat.model';
 import { FormBuilder } from '@angular/forms';
 import { ConversationService } from '../../services/conversation.service';
 
@@ -11,7 +11,7 @@ import { ConversationService } from '../../services/conversation.service';
   styleUrls: ['./testing.component.css'],
 })
 export class TestingComponent implements OnInit, OnDestroy {
-  public chatMap: Map<string, Chat>;
+  public chatMap: Map<string, Conversation>;
 
   conversation = this.formBuilder.group({
     groupName: '',
@@ -38,7 +38,7 @@ export class TestingComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     console.log('attempting to connect');
-    this.webSocketService.openSocketConnection();
+    // this.webSocketService.subscribeToTopic();
   }
 
   sendTestMessage() {

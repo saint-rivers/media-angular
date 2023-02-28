@@ -1,1 +1,7 @@
-<a [routerLink]="['/hello/' + chat.value.chatId]" *ngFor="let chat of chatMap | keyvalue">{{ chat.value | json }}</a>
+<!-- <a [routerLink]="['/hello/' + chat.value.chatId]" *ngFor="let chat of chatMap | keyvalue">{{ chat.value | json }}</a> -->
+
+<p>conversation list works</p>
+
+<div *ngFor="let chat of chatMap | keyvalue">
+  <a [routerLink]="['/hello/' + chat.value.chatId]">{{chat | json}}</a>
+</div>

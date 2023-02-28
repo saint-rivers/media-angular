@@ -6,6 +6,7 @@ export interface Message {
   senderId: string;
   targetConversationId: number;
 }
+
 export interface MessageRequest {
   content: string;
   type: 'message' | 'sticker';

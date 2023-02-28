@@ -1,0 +1,7 @@
+.text-bubble {
+  background-color: whitesmoke;
+}
+
+.text-bubble p:nth-child(2) {
+  color: gray;
+}
