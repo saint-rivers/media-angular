@@ -1,14 +1,9 @@
-import {
-  Component,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { WebSocketService } from '../../services/websocket.service';
 import { ChatRequest } from '../../models/chat-message';
 import { Chat } from 'src/app/models/chat';
-import { FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { ConversationService } from '../../services/conversation.service';
 
 @Component({
   selector: 'app-testing',
@@ -18,26 +13,22 @@ import { FormControl } from '@angular/forms';
 export class TestingComponent implements OnInit, OnDestroy {
   public chatMap: Map<string, Chat>;
 
-  // currentChatId = new FormControl<number>(1, {
-  //   nonNullable: true,
-  //   updateOn: 'change',
-  // });
+  conversation = this.formBuilder.group({
+    groupName: '',
+    groupProfile: '',
+    memberIds: [],
+  });
 
   currentChatId = -1;
 
-  constructor(private webSocketService: WebSocketService) {
+  constructor(
+    private webSocketService: WebSocketService,
+    private conversationService: ConversationService,
+    private formBuilder: FormBuilder
+  ) {
     this.chatMap = webSocketService.chatMap;
-    this.chatMap.set('1', {
-      chatId: 1,
-      groupProfile: 'fff',
-      messages: [],
-      members: undefined,
-    });
-    this.chatMap.set('2', {
-      chatId: 2,
-      groupProfile: 'asd',
-      messages: [],
-      members: undefined,
+    conversationService.getConversations().subscribe((res) => {
+      this.chatMap = res;
     });
   }
 
@@ -64,5 +55,18 @@ export class TestingComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.webSocketService.closeConnection();
+  }
+
+  createConversation() {
+    this.conversationService
+      .postConversation({
+        groupName: this.conversation.get('groupName')!.value,
+        groupProfile: this.conversation.get('groupProfile')!.value,
+        memberIds: [
+          '1a6fa8ac-949a-42b5-b0fe-35b85b56a047',
+          '9505eaee-256e-4ce7-828f-c67f941b8bf7',
+        ],
+      })
+      .subscribe();
   }
 }

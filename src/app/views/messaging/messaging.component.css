@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  flex-direction: row;
+}
+
+.conversations {
+  background-color: aqua;
+}
+
+.active-chat {
+  background-color: blanchedalmond;
+}

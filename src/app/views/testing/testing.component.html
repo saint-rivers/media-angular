@@ -1,5 +1,12 @@
 <p>testing works!</p>
-<p *ngFor="let chat of chatMap | keyvalue">{{ chat | json }}</p>
+<p *ngFor="let chat of chatMap | keyvalue">{{ chat.value | json }}</p>
 
 <input type="text" placeholder="targetChatId" (change)="updateChatId($event)">
 <button (click)="sendTestMessage()">Test</button>
+
+
+<form action="" [formGroup]="conversation" (submit)="createConversation()">
+  <input type="text" formControlName="groupName">
+  <input type="text" formControlName="groupProfile">
+  <input type="submit" value="create">
+</form>
