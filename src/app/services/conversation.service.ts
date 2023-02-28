@@ -19,11 +19,17 @@ export class ConversationService {
     );
   }
 
+  getConversation(conversationId: number): Observable<any> {
+    return this.http.get<any>(
+      `${env.environment.apiUrl}/api/v1/conversations/${conversationId}`
+    );
+  }
+
   getConversations(): Observable<any> {
     return this.http.get<any>(
       `${
         env.environment.apiUrl
-      }/api/v1/conversations/${'d4b6af2c-3cb5-4263-8ea7-d092cfddede5'}`
+      }/api/v1/conversations/user/${'d4b6af2c-3cb5-4263-8ea7-d092cfddede5'}`
     );
   }
 }

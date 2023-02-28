@@ -1,16 +1,14 @@
-export interface ChatRequest {
-  content: string;
-  type: 'message' | 'sticker';
-  timeSent: Date;
-  senderId: string;
-  targetChatId: number;
-}
-
-export interface ChatData {
+export interface Message {
   messageId: number;
   content: string;
   type: 'message' | 'sticker';
   timeSent: Date;
   senderId: string;
-  targetChatId: number;
+  targetConversationId: number;
+}
+export interface MessageRequest {
+  content: string;
+  type: 'message' | 'sticker';
+  timeSent: Date;
+  targetConversationId: number;
 }

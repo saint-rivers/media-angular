@@ -4,6 +4,7 @@ import * as SockJS from 'sockjs-client';
 import { environment } from '../../environments/environment';
 import { ChatRequest, ChatData } from '../models/chat-message';
 import { Chat } from '../models/chat';
+import { MessageRequest, Message } from '../models/message';
 
 /**
  * tutorial reference: https://haseeamarathunga.medium.com/create-a-spring-boot-angular-websocket-using-sockjs-and-stomp-cb339f766a98
@@ -13,7 +14,7 @@ import { Chat } from '../models/chat';
 })
 export class WebSocketService {
   stompClient: Stomp.Client;
-  public socketData: ChatData[] = [];
+  public socketData: Message[] = [];
 
   public chatMap = new Map<string, Chat>();
 
@@ -27,9 +28,11 @@ export class WebSocketService {
   }
 
   private onReceiveMessage = (data: any) => {
-    const payload: ChatData = JSON.parse(data.body);
-    console.log(payload.targetChatId);
-    this.chatMap.get(payload.targetChatId.toString())?.messages.push(payload);
+    const payload: Message = JSON.parse(data.body);
+    console.log(payload);
+    this.chatMap
+      .get(payload.targetConversationId.toString())
+      ?.messages.push(payload);
   };
 
   openSocketConnection() {
@@ -37,12 +40,16 @@ export class WebSocketService {
 
     const _this = this;
     this.stompClient.connect({}, (frame: any) => {
-      _this.stompClient.subscribe(`/topic/user/${1}`, this.onReceiveMessage);
+      _this.stompClient.subscribe(`/topic/user/${11}`, this.onReceiveMessage);
     });
   }
 
   sendMessage(message: ChatRequest) {
     this.stompClient.send('/app/messages/send', {}, JSON.stringify(message));
+  }
+
+  sendMessageV2(message: MessageRequest) {
+    this.stompClient.send('/app/v2/messages/send', {}, JSON.stringify(message));
   }
 
   closeConnection() {

@@ -1,2 +1,8 @@
 <p>active-chat works!</p>
-<p>{{activeChatId}}</p>
+<p>{{messages|json}}</p>
+
+
+<form action="" [formGroup]="newMessage" (submit)="sendMessage()">
+  <input type="text" placeholder="type your message here" formControlName="content">
+  <input type="submit" value="send">
+</form>

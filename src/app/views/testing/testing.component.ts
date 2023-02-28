@@ -19,7 +19,7 @@ export class TestingComponent implements OnInit, OnDestroy {
     memberIds: [],
   });
 
-  currentChatId = -1;
+  currentChatId: number = -1;
 
   constructor(
     private webSocketService: WebSocketService,
@@ -45,8 +45,8 @@ export class TestingComponent implements OnInit, OnDestroy {
     const payload = {
       content: 'waddup',
       timeSent: new Date(),
-      senderId: 1,
-      targetChatId: this.currentChatId,
+      senderId: 'd4b6af2c-3cb5-4263-8ea7-d092cfddede5',
+      targetChatId: 11,
       type: 'message',
     } as ChatRequest;
 
