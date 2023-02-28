@@ -1,1 +1,1 @@
-<p *ngFor="let chat of chatMap | keyvalue">{{ chat.value | json }}</p>
+<a [routerLink]="['/hello/' + chat.value.chatId]" *ngFor="let chat of chatMap | keyvalue">{{ chat.value | json }}</a>
